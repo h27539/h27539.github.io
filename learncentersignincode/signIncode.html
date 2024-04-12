@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自动生成二维码</title>
+    <!-- 引入生成二维码的库 -->
+    <script src="qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        #qrcode {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <h1>自动生成二维码</h1> -->
+    <!-- <p id="timestampText">text</p> -->
+    <div id="qrcode"></div>
+
+    <script>
+        // 页面加载完成后立即执行生成二维码的操作
+        window.onload = function() {
+            generateQR();
+        };
+
+        function generateQR() {
+            // var timestampText = document.getElementById('timestampText').textContent;
+
+            // 获取当前时间并格式化为指定格式
+            var currentDate = new Date();
+            var currentTimestamp = formatDate(currentDate);
+
+            // 替换文本中的时间信息
+            // var updatedText = timestampText.replace(/@\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}@/, `@${currentTimestamp}@`);
+
+            var qrContainer = document.getElementById('qrcode');
+            var date = new Date();//获取系统当前时间
+            var year = date.getFullYear();
+            var month = ('0' + (date.getMonth() + 1)).slice(-2);
+            var day = ('0' + date.getDate()).slice(-2);
+            var hours = ('0' + date.getHours()).slice(-2);
+            var minutes = ('0' + date.getMinutes()).slice(-2);
+
+            date.setMinutes(date.getMinutes() + 1);
+            var minutes1 = ('0' + date.getMinutes()).slice(-2);
+            var text = 'seatSignInCode@'+year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+'15@'+year+'-'+month+'-'+day+' '+hours+':'+(minutes1)+':'+'15'
+            // 使用 qrcode.js 库生成二维码
+            qrContainer.innerHTML = ''; // 清空之前的二维码
+            new QRCode(qrContainer, text);
+        }
+
+        // function myrefresh() { 
+        //     window.location.reload(); 
+        // } 
+        // setTimeout('myrefresh()',60000); 
+
+        // 格式化日期时间为指定格式：yyyy-MM-dd HH:mm:ss
+        function formatDate(date) {
+            var year = date.getFullYear();
+            var month = ('0' + (date.getMonth() + 1)).slice(-2);
+            var day = ('0' + date.getDate()).slice(-2);
+            var hours = ('0' + date.getHours()).slice(-2);
+            var minutes = ('0' + date.getMinutes()).slice(-2);
+            var seconds = ('0' + date.getSeconds()).slice(-2);
+            return `${year}-${month}-${day} ${hours}:${minutes}:15`;
+        }
+    </script>
+</body>
+</html>
