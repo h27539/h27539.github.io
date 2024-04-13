@@ -14,6 +14,7 @@
         }
         #qrcode {
             margin-top: 20px;
+
         }
     </style>
 </head>
@@ -45,19 +46,20 @@
             var day = ('0' + date.getDate()).slice(-2);
             var hours = ('0' + date.getHours()).slice(-2);
             var minutes = ('0' + date.getMinutes()).slice(-2);
-
+            var seconds = ('0' + date.getSeconds()).slice(-2);
             date.setMinutes(date.getMinutes() + 1);
             var minutes1 = ('0' + date.getMinutes()).slice(-2);
-            var text = 'seatSignInCode@'+year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+'15@'+year+'-'+month+'-'+day+' '+hours+':'+(minutes1)+':'+'15'
+
+            var text = 'seatSignInCode@'+year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds+'@'+year+'-'+month+'-'+day+' '+hours+':'+(minutes1)+':'+seconds;
             // 使用 qrcode.js 库生成二维码
             qrContainer.innerHTML = ''; // 清空之前的二维码
             new QRCode(qrContainer, text);
         }
 
-        // function myrefresh() { 
-        //     window.location.reload(); 
-        // } 
-        // setTimeout('myrefresh()',60000); 
+        function myrefresh() { 
+            window.location.reload(); 
+        } 
+        setTimeout('myrefresh()',60000); 
 
         // 格式化日期时间为指定格式：yyyy-MM-dd HH:mm:ss
         function formatDate(date) {
@@ -67,7 +69,7 @@
             var hours = ('0' + date.getHours()).slice(-2);
             var minutes = ('0' + date.getMinutes()).slice(-2);
             var seconds = ('0' + date.getSeconds()).slice(-2);
-            return `${year}-${month}-${day} ${hours}:${minutes}:15`;
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         }
     </script>
 </body>
